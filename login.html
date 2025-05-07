@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 300px;
+      margin: 50px auto;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Login</h2>
+
+  <div class="input-group">
+    <input id="login-username" type="text" placeholder="Username">
+  </div>
+
+  <div class="input-group">
+    <input id="login-password" type="password" placeholder="Password">
+    <span class="toggle-password" onclick="togglePassword()">👁️</span>
+  </div>
+
+  <button onclick="logIn()">Log In</button>
+  <p id="message"></p>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("login-password");
+      const toggleIcon = document.querySelector(".toggle-password");
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.textContent = "🙈";
+      } else {
+        passwordInput.type = "password";
+        toggleIcon.textContent = "👁️";
+      }
+    }
+
+    function logIn() {
+      const loginUsername = document.getElementById("login-username").value;
+      const loginPassword = document.getElementById("login-password").value;
+      const savedUsername = localStorage.getItem("username");
+      const savedPassword = localStorage.getItem("password");
+      const message = document.getElementById("message");
+
+      if (loginUsername === savedUsername && loginPassword === savedPassword) {
+        window.location.href = "dashboard.html";
+      } else {
+        message.textContent = "Login failed. Incorrect username or password.";
+        message.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
